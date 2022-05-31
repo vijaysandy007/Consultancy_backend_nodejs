@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
 
 const purposeSchema = mongoose.Schema({
-    purpose_name:{
-        type:String,
-        required: true
-    },
+  purpose_name: {
+    type: String,
+    required: true
+  },
 
-    staus:{
-      type:Boolean,
-      default:true
-    }
+  staus: {
+    type: Boolean,
+    default: true
+  }
 })
 
 const purpose = mongoose.model('purpose', purposeSchema)

@@ -1,30 +1,30 @@
 const moongse = require('mongoose')
 
 const allocateSubSchema = moongse.Schema({
-   from:{
-      type:String,
+   from: {
+      type: String,
 
    },
-   to:{
-      type:String
+   to: {
+      type: String
    }
 })
 
 const employee_calaender = moongse.Schema({
-    date:{
-       type: Date
-    },
-    slot_name:{
-       type:String
-    },
-   employee_id:{
-    type: String,
-   //  required: true
+   date: {
+      type: Date
    },
-   session_id:{ 
-     type:String,
-   },   
-   alloacte:[allocateSubSchema]
+   slot_name: {
+      type: String
+   },
+   employee_id: {
+      type: String,
+      required: true
+   },
+   session_id: {
+      type: String,
+   },
+   alloacte: [allocateSubSchema]
 })
 
 const alloacte = moongse.model('employee_allocate', employee_calaender)

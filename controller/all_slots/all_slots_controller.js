@@ -78,23 +78,23 @@ const deletSlot = async (req, ressponse) => {
     }
 }
 
-const deleteNestedSlots = async (req, res) =>{
+const deleteNestedSlots = async (req, res) => {
     try {
         const sessionId = req.body.sessions._id
-        const deleteSlots = await allSlotsSchema.updateOne({'_id': req.params.id}, {$pull: {"sessions": {_id: sessionId}}}, {multi:true})
+        const deleteSlots = await allSlotsSchema.updateOne({ '_id': req.params.id }, { $pull: { "sessions": { _id: sessionId } } }, { multi: true })
 
-        if(!deleteSlots){
-        return  res.status(400).send('Something went wrong')
-          
+        if (!deleteSlots) {
+            return res.status(400).send('Something went wrong')
+
         }
-          const getData = await allSlotsSchema.findOne({_id: req.params.id})
-       
-              res.status(200).json({data: getData, message: "Succesfuly deleted Nested slots"})
+        const getData = await allSlotsSchema.findOne({ _id: req.params.id })
+
+        res.status(200).json({ data: getData, message: "Succesfuly deleted Nested slots" })
 
 
     } catch (error) {
         res.status(500).send(error)
-        
+
     }
 }
 

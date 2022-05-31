@@ -46,7 +46,7 @@ const getAllocateDate = async (req, res) => {
 const updateSlots = async (req, res) => {
     try {
 
-        req.body.alloacte.forEach(async allocate =>{
+        req.body.alloacte.forEach(async allocate => {
             const check = await employee_allocate.findOneAndUpdate({ 'alloacte._id': allocate._id }, {
                 '$set': {
                     'alloacte.$.from': allocate.from,
@@ -73,7 +73,7 @@ const deleteAllocateSession = async (req, res) => {
         res.status(200).json({ data: balanceData, message: 'Allocate Delted' })
 
     } catch (error) {
-      res.status(500).send('Some Thing Went Wrong')
+        res.status(500).send('Some Thing Went Wrong')
     }
 }
 
