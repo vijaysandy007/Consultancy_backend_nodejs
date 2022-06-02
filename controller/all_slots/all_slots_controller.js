@@ -53,7 +53,6 @@ const updateSlots = async (req, response) => {
                             slot_name: req.body.slot_name
                         }
                     }, { new: true })
-                    console.log(check)
                     response.status(200).json({ data: check, message: 'Updated' })
                 }
             })
