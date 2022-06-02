@@ -18,6 +18,7 @@ const createSlots = async (req, res) => {
 }
 
 const getAllSlots = async (req, res) => {
+
     try {
         const { page, limit } = req.body
         const skip = (page - 1) * limit

@@ -1,6 +1,8 @@
 const employee_allocate = require('../../mongoose_schema/employee_profile_alocate_slot')
 const all_slots = require('../../mongoose_schema/all_slots')
 
+
+
 const createAllocateByEmployee = async (req, res) => {
     try {
 
@@ -11,11 +13,20 @@ const createAllocateByEmployee = async (req, res) => {
         }
 
         let myTestArry = [];
+
+        const date = new Date(req.body.date).toUTCString()
+        const year = date.split(' ')
+
+        const time = ` ${year[0]} ${year[1]} ${year[2]} ${year[3]}`
+
         allSlots.sessions.forEach(element => {
-            myTestArry.push({ from: element.from, to: element.to })
+
+            myTestArry.push({ from: `${time} ${element.from.split(' ')[0]} GMT`, to: `${time} ${element.to.split(' ')[0]} GMT` })
         });
 
+
         const createAllocate = await employee_allocate.create({
+
             alloacte: myTestArry,
             date: req.body.date,
             slot_name: allSlots.slot_name,
