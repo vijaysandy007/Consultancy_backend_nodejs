@@ -6,9 +6,9 @@ const purposeSchema = mongoose.Schema({
     required: true
   },
 
-  staus: {
+  status: {
     type: Boolean,
-    default: true
+    default: false
   }
 })
 
