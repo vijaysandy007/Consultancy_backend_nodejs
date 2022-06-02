@@ -6,7 +6,7 @@ const serviceSchema = mongoose.Schema({
     required: true
   },
 
-  staus: {
+  status: {
     type: Boolean,
     default: true
   }

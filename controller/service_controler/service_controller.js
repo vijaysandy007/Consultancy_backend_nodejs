@@ -3,14 +3,16 @@ const serviceSchema = require('../../mongoose_schema/service_schema')
 const createService = async (req, res) => {
 
     try {
-        const servie = await serviceSchema({
-            service_name: req.body.service_name
+        const service = await new serviceSchema({
+            service_name: req.body.service_name,
+            status:req.body.status
         })
 
-        if (!servie) {
+        if (!service) {
          return res.status(400).send('Something went wrong')
         }
-        res.status(200).json({data:servie, message: 'Successfully created'})
+        await service.save()
+         res.status(200).json({data:service, message: 'Successfully created'})
 
     } catch (error) {
          res.status(500).send(error)
@@ -59,12 +61,18 @@ const updateService = async (req,res) =>{
 
 const deleteService = async (req,res) =>{
 try {
-    const service = await serviceSchema.findByIdAndDelete({_id:eq.params.id}, {new:true})
+    const service = await serviceSchema.findByIdAndDelete({_id:req.params.id}, {new:true})
 
     if(!service){
         return res.status(400).send('Something went wrong')
     }
-    res.status(200).json({data:service, message: 'Successfully Updated'}) 
+
+    const {page , limit} = req.body
+    const skip = (page -1) * limit
+
+    const findResetData = await serviceSchema.find({}, {}, {limit:limit, skip:skip})
+
+    res.status(200).json({data:findResetData, message: 'Successfully Updated'}) 
 } catch (error) {
     res.status(500).send(error)
     
