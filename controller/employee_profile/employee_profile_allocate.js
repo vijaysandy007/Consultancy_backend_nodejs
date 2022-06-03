@@ -25,9 +25,6 @@ const createAllocateByEmployee = async (req, res) => {
             myTestArry.push({ from: `${time} ${element.from.split(' ')[0]} GMT`, to: `${time} ${element.to.split(' ')[0]} GMT` })
         });
        
-        console.log(myTestArry, 'array')
-
-
         const createAllocate = await employee_allocate.create({
 
             alloacte: myTestArry,
@@ -61,15 +58,18 @@ const updateSlots = async (req, res) => {
     try {
 
         req.body.alloacte.forEach(async allocate => {
-            const check = await employee_allocate.findOneAndUpdate({ 'alloacte._id': allocate._id }, {
+          await employee_allocate.findOneAndUpdate({ 'alloacte._id': allocate._id }, {
                 '$set': {
                     'alloacte.$.from': allocate.from,
                     'alloacte.$.to': allocate.to,
                     slot_name: req.body.slot_name
                 }
             }, { new: true })
-            res.status(200).json({ data: check, message: 'Updated' })
         })
+
+        const isEmpoyeeSlotUpdate  = await employee_allocate.findOne({_id:req.params.id})
+        res.status(200).json({ data: isEmpoyeeSlotUpdate, message: 'Updated' })
+
 
     } catch (error) {
         res.status(500).send(error.error.message)
