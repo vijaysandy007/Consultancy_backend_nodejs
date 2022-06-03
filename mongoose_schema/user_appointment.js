@@ -38,3 +38,6 @@ const appointment = mongoose.Schema({
         type:String
     }
 })
+
+const appointmentSchema = mongoose.model('appointment', appointment)
+module.exports = appointmentSchema
