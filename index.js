@@ -9,7 +9,8 @@ const slotsRoute = require('./Router/All_slots/all_slots_routes')
 const serviceRoute = require('./Router/service_route/service_routes')
 const purposeRoute = require('./Router/Purpose_route/purpose_route')
 const employeeProfileAllocate = require('./Router/Employee_Profile/allocate_employee_by_id')
-app.use(employeeRoute, slotsRoute, serviceRoute, purposeRoute, employeeProfileAllocate)
+const separteAllocate = require('./Router/seprateAllocate/separte_router')
+app.use(employeeRoute, slotsRoute, serviceRoute, purposeRoute, employeeProfileAllocate, separteAllocate)
 
 
 app.listen(process.env.PORT, ()=>{

@@ -23,7 +23,6 @@ const appointment = mongoose.Schema({
     },
     time_zone:{
         type:String,
-
     },
     date:{
         type:Date
