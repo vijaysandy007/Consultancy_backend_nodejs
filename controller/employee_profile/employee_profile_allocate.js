@@ -20,9 +20,12 @@ const createAllocateByEmployee = async (req, res) => {
         const time = ` ${year[0]} ${year[1]} ${year[2]} ${year[3]}`
 
         allSlots.sessions.forEach(element => {
-
+            console.log(element.from.split())
+           
             myTestArry.push({ from: `${time} ${element.from.split(' ')[0]} GMT`, to: `${time} ${element.to.split(' ')[0]} GMT` })
         });
+       
+        console.log(myTestArry, 'array')
 
 
         const createAllocate = await employee_allocate.create({

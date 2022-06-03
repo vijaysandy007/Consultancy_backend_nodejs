@@ -42,25 +42,24 @@ const getAllSlots = async (req, res) => {
 
 const updateSlots = async (req, response) => {
     try {
-        const myArray = [];
-        myArray.push(await req.body)
-        myArray.forEach(async responseBody => {
-            responseBody.sessions.forEach(async session => {
+
+        req.body.sessions.forEach(async session => {
                 if (session._id) {
-                    const check = await allSlotsSchema.findOneAndUpdate({ 'sessions._id': session._id }, {
+                     await allSlotsSchema.findOneAndUpdate({ 'sessions._id': session._id }, {
                         '$set': {
                             'sessions.$.from': session.from,
                             'sessions.$.to': session.to,
                             slot_name: req.body.slot_name
                         }
                     }, { new: true })
-                    response.status(200).json({ data: check, message: 'Updated' })
                 }
             })
-        })
+             const findUpdatedData = await allSlotsSchema.findOne({_id:req.params.id})
+            response.status(200).json({ data: findUpdatedData, message: 'Slot Has Been Updated' })
+          
 
     } catch (error) {
-        res.status(500).send(error)
+        response.status(500).send(error)
     }
 }
 
