@@ -12,7 +12,7 @@ const getAllocateList = async (req, res) => {
   const myDate = `${Myyear}-${formatDate(Mymonth)}-${formatDate(Mydate)}`
   var ResponseDate;
   var FiteenResult = []
-  var thirtyResult=[]
+
   findSlots.forEach(data => {
     const resDateObj = new Date(data.date)
     const Responseyear = resDateObj.getUTCFullYear()
@@ -28,9 +28,6 @@ const getAllocateList = async (req, res) => {
       const end = moment(to, 'YYYY-MM-DD hh:mm a')
       start.minute(Math.ceil(start.minutes() / 15) * 15)
 
-      // const thirtyStart =  moment(from, 'YYYY-MM-DD hh:mm a')
-      // const thirtyEnd = moment(to, 'YYYY-MM-DD hh:mm a')
-
       start.minute(Math.ceil(start.minutes() / 15) * 15)
 
       while (start <= end) {
@@ -43,11 +40,14 @@ const getAllocateList = async (req, res) => {
     })
   })
 
-  if (ResponseDate == myDate) {
+  if (ResponseDate != myDate) {
 
+    return res.status(400).json({message:'No slot Available On this date'})
+   }
+   else{
     res.status(200).json({ data: FiteenResult })
 
-  }
+   }
 }
 
 
