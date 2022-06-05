@@ -10,6 +10,7 @@ const serviceSchema = mongoose.Schema({
     type: Boolean,
     default: true
   }
+  
 })
 
 const service = mongoose.model('service', serviceSchema)

@@ -35,6 +35,10 @@ const appointment = mongoose.Schema({
     },
     meeting_type:{
         type:String
+    },
+    service_id: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'services'
     }
 })
 
